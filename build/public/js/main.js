@@ -42,7 +42,7 @@ $(function() {
             if ($(this) != elem) {
                 $(this).removeClass('active');
                 var image = $(this).find('img');
-                image.attr("src", `images/products/${$(this).data('id')}.svg`);
+                image.attr("src", `images/products/${$(this).data('icon')}.svg`);
             }
 
         })
