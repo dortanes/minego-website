@@ -1,0 +1,213 @@
+@media (min-width: 0px) and (max-width: 1440px) {
+    header .row .logo img {
+        width: 100%;
+        height: auto
+    }
+
+    .advantage_section .advantage_block .title {
+        font-size: 18px;
+        text-align: center
+    }
+
+    header .row .menu .menu_list .link {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 0) and (max-width: 769px) {
+    header .row .ip .ip_block {
+        display: none
+    }
+
+    header .row .menu {
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end
+    }
+
+    header .row .menu .menu_list {
+        display: none;
+        position: fixed;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #fff
+    }
+
+    header .row .menu .menu_list .link {
+        width: 100%;
+        height: 60px
+    }
+
+    header .row .menu .menu_list .ip_block {
+        margin-top: 20px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex
+    }
+
+    header .row .menu .menu_list.active {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex
+    }
+
+    .shop_section .shop_container .left_side {
+        max-width: 187px
+    }
+
+    .shop_section .shop_container .right_side {
+        position: relative;
+        z-index: 4;
+        max-width: calc(100% - 187px);
+        width: calc(100% - 187px);
+        padding: 35px 32px
+    }
+
+    .shop_section .shop_container .left_side img {
+        height: 40%
+    }
+
+    .shop_section .shop_container .left_side {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center
+    }
+
+    .shop_section .shop_container .left_side .text {
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        width: auto;
+        text-align: center
+    }
+
+    .shop_section .shop_container .left_side .text br {
+        display: none
+    }
+
+    header .row .menu .mobile_menu {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex
+    }
+}
+
+@media (min-width: 0px) and (max-width: 426px) {
+    .start_section .row .info_start .title {
+        font-size: 28px;
+        line-height: 35px;
+        text-align: center
+    }
+
+    .start_section .row .info_start .desc {
+        text-align: center
+    }
+
+    .start_section .row .info_start a.play {
+        margin: 0 auto
+    }
+
+    .shop_section .shop_container .left_side {
+        display: none
+    }
+
+    .shop_section .shop_container .right_side {
+        max-width: 100%;
+        width: 100%
+    }
+
+    .mode_section .row .text {
+        text-align: center;
+        margin-top: 20px
+    }
+
+    .mode_section .row .arrows {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        margin-bottom: 30px
+    }
+
+    .shop_section .shop_container .right_side .footer button {
+        width: 137px
+    }
+
+    .mode_section .row .slider {
+        margin-bottom: 40px
+    }
+
+    footer .row {
+        padding: 10px 0px
+    }
+
+    footer .row .copy {
+        text-align: center;
+        margin-bottom: 30px
+    }
+
+    footer .row .other {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        margin-top: 10px;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center
+    }
+
+    footer .row .other .payments {
+        margin-bottom: 10px
+    }
+
+    footer .row .other .payments img {
+        margin-right: 0;
+        margin: 0 10px
+    }
+
+    .footer_links .row .mail {
+        max-width: 100%;
+        margin-bottom: 15px;
+        text-align: center
+    }
+
+    .footer_links .row .links {
+        max-width: 100%;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center
+    }
+
+    .footer_links .row .links a {
+        margin: 0;
+        margin-bottom: 10px
+    }
+}
+
+/*# sourceMappingURL=media.min.css.map */

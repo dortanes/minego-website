@@ -1,0 +1,94 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="robots" content="noindex">
+	<title>Оплата</title>
+	<link href="/payment/pay.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/payment/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+	<section class="container" role="main">
+		<h2>Оплата привилегии "{{ pack.name }}"</h2>
+		<div class="methods">
+			<div class="method" onclick="location.href = '/pay/qiwi/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/qiwi.png">
+				<div class="description">
+					<h4 class="name">QIWI Кошелек</h4><span class="category">Электронные деньги</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/yoom/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/ymani.jpg">
+				<div class="description">
+					<h4 class="name">ЮMoney</h4><span class="category">Электронные деньги</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/card/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/card2.svg">
+				<div class="description">
+					<h4 class="name">Банковские карты</h4><span class="category">Безналичные платежи</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/appl/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/logo-applepay.png">
+				<div class="description">
+					<h4 class="name">Apple Pay</h4><span class="category">Безналичные платежи</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/goog/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/googlik.jpg">
+				<div class="description">
+					<h4 class="name">Google Pay</h4><span class="category">Безналичные платежи</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/mega/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/megafon.png">
+				<div class="description">
+					<h4 class="name">Мегафон</h4><span class="category">Мобильные платежи</span></div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/beel/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/beeline.png">
+				<div class="description">
+					<h4 class="name">Билайн</h4><span class="category">Мобильные платежи</span></div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/term/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/term.png">
+				<div class="description">
+					<h4 class="name">Терминалы Qiwi</h4><span class="category">Платежи наличными</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/advc/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/logo-advcash.png">
+				<div class="description">
+					<h4 class="name">Advcash</h4><span class="category">Электронные деньги</span></div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/perf/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/logo-pm.png">
+				<div class="description">
+					<h4 class="name">Perfect Money</h4><span class="category">Электронные деньги</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/btc/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/btc.png">
+				<div class="description">
+					<h4 class="name">Bitcoin</h4><span class="category">Криптовалюта</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/btcc/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/btcc.png">
+				<div class="description">
+					<h4 class="name">Bitcoin Cash</h4><span class="category">Криптовалюта</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/eth/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/logo-ethereum.png">
+				<div class="description">
+					<h4 class="name">Ethereum</h4><span class="category">Криптовалюта</span> </div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/ltc/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/ltc.png">
+				<div class="description">
+					<h4 class="name">Litecoin</h4><span class="category">Криптовалюта</span> </div>
+			</div>
+		</div>
+
+        <div style="display: flex; justify-content: center; margin-top: 3em">
+            <img src="/images/logo.svg"/>
+        </div>
+	</section>
+
+</body>
+</html>

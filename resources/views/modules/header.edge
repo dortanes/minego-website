@@ -1,0 +1,72 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-3 col-5 logo">
+                <a href="/"><img src="images/logo.svg" alt="mineGO" class=""></a>
+            </div>
+            <div class="col-xl-8 col-lg-7 col-md-9 col-7 menu">
+                <div class="mobile_menu">
+                    <span></span>
+                </div>
+                <div class="menu_list">
+                    <a href="/" class="link">
+                        <img src="images/icon_home.svg" alt="" class="icon"> Главная
+                    </a>
+                    <a href="/help" class="link">
+                        <img src="images/icon_help.png" alt="" class="icon"> Помощь
+                    </a>
+                    <a href="/rules" class="link">
+                        <img src="images/icon_rules.svg" alt="" class="icon"> Правила игры
+                    </a>
+                    <a href="https://partner.minego.me" target="_blank" class="link">
+                        <img src="images/money.svg" alt="" class="icon"> Партнёрка
+                    </a>
+                    <a href="" class="ip_block" onclick="copyIp(); return false">
+                        <div class="name">IP</div>
+                        mc.minego.me
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 ip">
+                <a href="" class="ip_block" onclick="copyIp(); return false">
+                    <div class="name">IP</div>
+                    mc.minego.me
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+window.onload = function () {
+    toastr.options = {
+        closeButton: true,
+        newestOnTop: true,
+        progressBar: true,
+        showDuration: 500,
+        hideDuration: 500,
+        timeOut: 6000,
+    };
+    
+    const path = window.location.pathname;
+    let done = false
+    for (const i of document.querySelectorAll('.menu_list .link')) {
+        if (i.getAttribute('href') === path && done === false) {
+            i.classList.add('active');
+            done = true;
+        } else {
+            i.classList.remove('active');
+        }
+    }
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
+    if (params?.error) {
+        $('html, body').animate({
+            scrollTop: $(".shop_container").offset().top
+        }, 600);
+        if (params?.error === "no") toastr.success("Спасибо за покупку! Привилегия уже у вас.")
+        else toastr.error(params?.error);
+    };
+};
+</script>
