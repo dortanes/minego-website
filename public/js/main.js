@@ -22,15 +22,15 @@ $(function() {
     $(".shop_section .shop_container .right_side .slider .product_block").on({
         mouseenter: function() {
             var image = $(this).find('img');
-            image.attr("src", `images/products/${$(this).data('id')}_hover.svg`);
+            image.attr("src", `images/products/${$(this).data('icon')}_hover.svg`);
         },
         mouseleave: function() {
             if (!$(this).hasClass('active')) {
                 var image = $(this).find('img');
-                image.attr("src", `images/products/${$(this).data('id')}.svg`);
+                image.attr("src", `images/products/${$(this).data('icon')}.svg`);
             } else {
                 var image = $(this).find('img');
-                image.attr("src", `images/products/${$(this).data('id')}_hover.svg`);
+                image.attr("src", `images/products/${$(this).data('icon')}_hover.svg`);
             }
 
         }
@@ -42,7 +42,7 @@ $(function() {
             if ($(this) != elem) {
                 $(this).removeClass('active');
                 var image = $(this).find('img');
-                image.attr("src", `images/products/${$(this).data('id')}.svg`);
+                image.attr("src", `images/products/${$(this).data('icon')}.svg`);
             }
 
         })

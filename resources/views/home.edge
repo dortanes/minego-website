@@ -48,7 +48,7 @@
                                 <input type="hidden" name="id_pack" value="" required>
                                 <div class="slider">
                                     @each(pack in packs)
-                                        <div class="product_block" data-id="{{ pack.id }}" data-price="{{ pack.amount }}">
+                                        <div class="product_block" data-id="{{ pack.id }}" data-icon="{{ pack.icon }}" data-price="{{ pack.amount }}">
                                             <img src="/images/products/{{ pack.icon }}.svg" alt="" class="icon">
                                             <div class="name">{{ pack.name }}</div>
                                             <div class="price">{{ pack.amount }}₽</div>
