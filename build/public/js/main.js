@@ -48,6 +48,8 @@ $(function() {
 
         })
         $(this).addClass('active');
+        var image = $(this).find('img');
+        image.attr("src", `images/products/${$(this).data('icon')}.svg`);
         $('input[name="id_pack"]').val($(this).data('id'));
         $('.shop_section .shop_container .right_side .footer .price').removeClass('hidden');
         $('.shop_section .shop_container .right_side .footer .price .value').html(`${$(this).data('price')}₽`)
