@@ -1,0 +1,167 @@
+@media (min-width: 0px) and (max-width: 1920px) {}
+
+@media (min-width: 0px) and (max-width: 1780px) {}
+
+@media (min-width: 0px) and (max-width: 1584px) {}
+
+@media (min-width: 0px) and (max-width: 1540px) {}
+
+@media (min-width: 0px) and (max-width: 1440px) {
+    header .row .logo img {
+        width: 100%;
+        height: auto;
+    }
+    .advantage_section .advantage_block .title {
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 1380px) {}
+
+@media (min-width: 0px) and (max-width: 1330px) {}
+
+@media (min-width: 0px) and (max-width: 1220px) {}
+
+@media (min-width: 0) and (max-width: 1024px) {}
+
+@media (min-width: 0) and (max-width: 922px) {}
+
+@media (min-width: 0) and (max-width: 769px) {
+    header .row .ip .ip_block {
+        display: none;
+    }
+    header .row .menu {
+        justify-content: flex-end;
+    }
+    header .row .menu .menu_list {
+        display: none;
+        position: fixed;
+        flex-direction: column;
+        align-items: center;
+        .link {
+            width: 100%;
+            height: 60px;
+        }
+        .ip_block {
+            margin-top: 20px;
+            display: flex;
+        }
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #fff;
+        &.active {
+            display: flex;
+        }
+    }
+    .shop_section .shop_container .left_side {
+        max-width: 187px;
+    }
+    .shop_section .shop_container .right_side {
+        position: relative;
+        z-index: 4;
+        max-width: calc(100% - 187px);
+        width: calc(100% - 187px);
+        padding: 35px 32px;
+    }
+    .shop_section .shop_container .left_side img {
+        height: 40%;
+    }
+    .shop_section .shop_container .left_side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .shop_section .shop_container .left_side .text {
+        transform: rotate(-90deg);
+        width: auto;
+        text-align: center;
+        br {
+            display: none;
+        }
+    }
+    header .row .menu .mobile_menu {
+        display: flex;
+    }
+}
+
+@media (min-width: 0) and (max-width: 630px) {}
+
+@media (min-width: 0px) and (max-width: 505px) {}
+
+@media (min-width: 0px) and (max-width: 426px) {
+    .start_section .row .info_start .title {
+        font-size: 28px;
+        line-height: 35px;
+        text-align: center;
+    }
+    .start_section .row .info_start .desc {
+        text-align: center;
+    }
+    .start_section .row .info_start a.play {
+        margin: 0 auto;
+    }
+    .shop_section .shop_container .left_side {
+        display: none;
+    }
+    .shop_section .shop_container .right_side {
+        max-width: 100%;
+        width: 100%;
+    }
+    .mode_section .row .text {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .mode_section .row .arrows {
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+    .shop_section .shop_container .right_side .footer button {
+        width: 137px;
+    }
+    .mode_section .row .slider {
+        margin-bottom: 40px;
+    }
+    footer .row {
+        padding: 10px 0px;
+    }
+    footer .row .copy {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    footer .row .other {
+        flex-direction: column;
+        margin-top: 10px;
+        align-items: center;
+    }
+    footer .row .other .payments {
+        margin-bottom: 10px;
+        img {
+            margin-right: 0;
+            margin: 0 10px;
+        }
+    }
+    .footer_links .row .mail {
+        max-width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .footer_links .row .links {
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        a {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media (min-width: 0px) and (max-width: 376px) {}
+
+@media (min-width: 0px) and (max-width: 320px) {}

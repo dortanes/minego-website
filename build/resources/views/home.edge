@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        @include('modules/head')
+    </head>
+    <body>
+        @include('modules/header')
+        <section class="start_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 info_start">
+                        <h1 class="title">Самый хайповый проект с огромным выбором мини-игр!</h1>
+                        <h3 class="desc">Тут тебе и твоим друзьям точно будет чем заняться! Множество мини-игр, уникальное выживание, авторские режимы. Наши сервера иногда посещают знаменитые персоны <span style="font-weight: 500; color: white">(без рофла)</span>, а администрация проекта всегда готова пойти тебе на помощь! Также, специально для наших любимых игроков, мы реализовали <b style="color: white">уникальную партнёрскую систему</b>! Такого ещё ни у кого не было!</h3>
+                        <div class="online_block">
+                            <a href="" class="ip_block" onclick="copyIp(); return false">
+                                <div class="name">IP</div>
+                                <span>mc.minego.me</span>
+                            </a>
+                            <a href="" class="ip_block">
+                                <div class="name">Онлайн</div>
+                                <span id="online">?/?</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="shop_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="shop_container">
+                            <div class="left_side">
+                                <img src="/images/picture_donate.png" alt="">
+                                <div class="text">
+                                    Покупка <br> привилегии
+                                </div>
+                            </div>
+                            <form class="right_side" action="/buy" method="post">
+                                <div class="header_slider">
+                                    <div class="name">Выберите привилегию</div>
+                                    <div class="arrows">
+                                        <img src="/images/bi_arrow-right-circle-fill.svg" alt="" class="arrow left">
+                                        <img src="/images/bi_arrow-right-circle-fill.svg" alt="" class="arrow right">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="id_pack" value="" required>
+                                <div class="slider">
+                                    @each(pack in packs)
+                                        <div class="product_block" data-id="{{ pack.id }}" data-price="{{ pack.amount }}">
+                                            <img src="/images/products/{{ pack.icon }}.svg" alt="" class="icon">
+                                            <div class="name">{{ pack.name }}</div>
+                                            <div class="price">{{ pack.amount }}₽</div>
+                                        </div>
+                                    @endeach
+                                </div>
+                                <div class="input_wrap">
+                                    <div class="label">Введите ваш ник</div>
+                                    <input type="text" name="nickname" placeholder="Введите ваш ник" required>
+                                </div>
+                                <div class="input_wrap">
+                                    <div class="label">Введите промокод</div>
+                                    <input type="text" name="promocode" placeholder="Введите промокод">
+                                </div>
+                                <div class="footer">
+                                    <div class="price hidden">
+                                        <div class="label">К оплате</div>
+                                        <div class="value">520₽</div>
+                                    </div>
+                                    <button>Оплатить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="advantage_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="title">Почему мне стоит играть на <span>mineGO?</span></div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="advantage_block">
+                            <img src="/images/play_icon.svg" alt="" class="icon">
+                            <div class="title">Интересные <br> игры
+                            </div>
+                            <div class="desc">
+                                Самые весёлые игры, полностью<br> погружающие тебя в процесс.<br> Выбирай любую!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="advantage_block">
+                            <img src="/images/smile_icon.svg" alt="" class="icon">
+                            <div class="title">Дружелюбная администрация
+                            </div>
+                            <div class="desc">
+                                Поможет в любой ситуации.<br> Смело обращайся!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="advantage_block">
+                            <img src="/images/guarant_icon.svg" alt="" class="icon">
+                            <div class="title">Гарантия честности
+                            </div>
+                            <div class="desc">
+                                Твоя привилегия будет <br> у тебя уже через 3 секунды<br> после оплаты!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="advantage_block">
+                            <img src="/images/shield_icon.svg" alt="" class="icon">
+                            <div class="title">Надёжная<br>защита
+                            </div>
+                            <div class="desc">
+                                Все твои игровые данные и платежи надёжно защищены шифрованием и хранятся за границей.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mode_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="text">Какие <br> режимы есть <br> на mineGO?</div>
+                        <div class="arrows">
+                            <img src="/images/slide_white.svg" alt="" class="slide left">
+                            <img src="/images/slide_white.svg" alt="" class="slide right">
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-6">
+                        <div class="slider">
+                            <div class="mode_block">
+                                <img src="/images/mode/survnext.png" alt="SurvNext" class="pattern">
+                                <div class="title">SurvNext</div>
+                                <div class="desc">Выживание <b style="color: white">НОВОГО ПОКОЛЕНИЯ</b></div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/survclassic.png" alt="SurvClassic" class="pattern">
+                                <div class="title">SurvClassic</div>
+                                <div class="desc">Классическое выживание</div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/amongus.png" alt="AmongUs" class="pattern">
+                                <div class="title">AmongUs</div>
+                                <div class="desc">Вычисли предателя</div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/bedwars.png" alt="BedWars" class="pattern">
+                                <div class="title">BedWars</div>
+                                <div class="desc">Сохрани свою кровать</div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/skywars.png" alt="SkyWars" class="pattern">
+                                <div class="title">SkyWars</div>
+                                <div class="desc">Завладей островами</div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/murder.png" alt="MurderMystery" class="pattern">
+                                <div class="title">Murder <br> Mystery </div>
+                                <div class="desc">Устрани убийцу</div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/buildbattle.png" alt="BuildBattle" class="pattern">
+                                <div class="title">BuildBattle</div>
+                                <div class="desc">Построй лучше всех</div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/blockhunt.png" alt="BlockHunt" class="pattern">
+                                <div class="title">BlockHunt</div>
+                                <div class="desc">Найди все блоки</div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/tntrun.png" alt="TNTRun" class="pattern">
+                                <div class="title">TNTRun</div>
+                                <div class="desc">Не упади в пропасть</div>
+                            </div>
+                            <div class="mode_block">
+                                <img src="/images/mode/village.png" alt="VillageDefenct" class="pattern">
+                                <div class="title">Village <br> Defence
+                                </div>
+                                <div class="desc">Защити деревню</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        @include('modules/footer')
+        @include('modules/scripts')
+    </body>
+
+</html>
