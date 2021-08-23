@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node ace build --production && cp -R public build/",
+    "build": "node ace build --production && cp -R public build/ && git add build -f && git commit -m 'Update'",
     "start": "node server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
