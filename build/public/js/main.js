@@ -22,6 +22,7 @@ $(function() {
     $(".shop_section .shop_container .right_side .slider .product_block").on({
         mouseenter: function() {
             var image = $(this).find('img');
+            if ($(this).hasClass('active')) return;
             image.attr("src", `images/products/${$(this).data('icon')}_hover.svg`);
         },
         mouseleave: function() {
