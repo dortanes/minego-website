@@ -1,5 +1,5 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { RconClient } from 'rcon-client'
+import * as Rcon from "rcon"
 
 import Pack from 'App/Models/Pack'
 
@@ -14,12 +14,27 @@ export default class PackGiverController {
 
     console.trace(credentials, cmd)
 
-    const rcon = await RconClient.connect(
-      credentials[1].split(':')[0],
-      Number(credentials[1].split(':')[1]),
-      credentials[0]
-    )
+    return await new Promise((resolve, reject) => {
+      const rcon = new Rcon(
+        credentials[1].split(':')[0],
+        Number(credentials[1].split(':')[1]),
+        credentials[0]
+      ); 
 
-    return await rcon.send(cmd)
+      rcon.on('auth', () => {
+        console.log("rcon >> authenticated! sending command", cmd);
+        rcon.send(cmd);
+      }).on('response', (str) => {
+        console.log('rcon >> response:', str);
+        resolve(true);
+      }).on('error', (err) => {
+        console.error(err);
+        reject(err);
+      }).on('end', () => {
+        console.log('rcon >> connection closed');
+      })
+
+      rcon.connect();
+    })
   }
 }

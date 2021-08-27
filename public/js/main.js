@@ -22,6 +22,7 @@ $(function() {
     $(".shop_section .shop_container .right_side .slider .product_block").on({
         mouseenter: function() {
             var image = $(this).find('img');
+            if ($(this).hasClass('active')) return;
             image.attr("src", `images/products/${$(this).data('icon')}_hover.svg`);
         },
         mouseleave: function() {
@@ -47,6 +48,8 @@ $(function() {
 
         })
         $(this).addClass('active');
+        var image = $(this).find('img');
+        image.attr("src", `images/products/${$(this).data('icon')}_hover.svg`);
         $('input[name="id_pack"]').val($(this).data('id'));
         $('.shop_section .shop_container .right_side .footer .price').removeClass('hidden');
         $('.shop_section .shop_container .right_side .footer .price .value').html(`${$(this).data('price')}₽`)
