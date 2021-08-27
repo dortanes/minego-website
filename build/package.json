@@ -31,7 +31,7 @@
     "mysql": "^2.18.1",
     "node-mc-api": "^1.2.1",
     "proxy-addr": "^2.0.7",
-    "rcon-client": "^5.0.0-alpha.1",
+    "rcon": "^1.0.4",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.19"
   }
