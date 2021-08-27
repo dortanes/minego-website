@@ -7,7 +7,7 @@ var Rcon = require('rcon');
 const Pack_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Pack"));
 class PackGiverController {
     async execute({ nickname, packId }) {
-        const pack = await Pack_1.default.query().where('id', '=', packId).select('group').first();
+        const pack = await Pack_1.default.query().where('id', '=', packId).select(['group', 'name']).first();
         const credentials = process.env.RCON?.split('@');
         const cmd = String(process.env.RCON_CMD)
             .replace('%nick', nickname)
