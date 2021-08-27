@@ -21,6 +21,7 @@
 			<div class="method" onclick="location.href = '/pay/yoom/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'"
 			@if(price < 20)
 				style="opacity: 0.5"
+				onclick="alert('Этот способ недоступен, так как цена доната меньше 20 руб.'); return"
 			@endif
 			>
                 <img class="image" src="/payment/ymani.jpg">
