@@ -12,7 +12,6 @@ class PackGiverController {
         const cmd = String(process.env.RCON_CMD)
             .replace('%nick', nickname)
             .replace('%group', String(pack?.group));
-        console.trace(credentials, cmd);
         return await new Promise((resolve, reject) => {
             const rcon = new Rcon(credentials[1].split(':')[0], Number(credentials[1].split(':')[1]), credentials[0]);
             rcon.on('auth', () => {
