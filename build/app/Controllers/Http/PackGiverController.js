@@ -17,7 +17,7 @@ class PackGiverController {
             rcon.on('auth', () => {
                 console.log("rcon >> authenticated! sending command", cmd);
                 rcon.send(cmd);
-                rcon.send('&a&lСпасибо &c&l' + nickname + ' &a&lза покупку привилегии "&f&l' + String(pack?.group) + '&a&l"!');
+                rcon.send('broadcast &a&lСпасибо &c&l' + nickname + ' &a&lза покупку привилегии "&f&l' + String(pack?.group) + '&a&l"!');
             }).on('response', (str) => {
                 console.log('rcon >> response:', str);
                 resolve(true);
