@@ -18,10 +18,10 @@
 				<div class="description">
 					<h4 class="name">QIWI Кошелек</h4><span class="category">Электронные деньги</span> </div>
 			</div>
-			<div class="method" onclick="location.href = '/pay/yoom/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+			<div class="method" onclick="location.href = '/pay/yoom/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'" @if(price < 20) style="opacity: 0.5" @endif>
                 <img class="image" src="/payment/ymani.jpg">
 				<div class="description">
-					<h4 class="name">ЮMoney</h4><span class="category">Электронные деньги</span> </div>
+					<h4 class="name">ЮMoney</h4><span class="category">@if(price < 20)Этот способ недоступен, так как цена доната меньше 20 руб.@elseЭлектронные деньги@endif</span> </div>
 			</div>
 			<div class="method" onclick="location.href = '/pay/card/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
                 <img class="image" src="/payment/card2.svg">
