@@ -1,8 +1,6 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 const Rcon = require('rcon')
 
-import declineWord from 'decline-word'
-
 import Pack from 'App/Models/Pack'
 import Setting from 'App/Models/Setting'
 
@@ -41,9 +39,9 @@ export default class PackGiverController {
           rcon.send(
             'broadcast &e&lСпасибо &a&l&n' +
               nickname +
-              '&e&l за покупку &c&l' +
-              declineWord(1, String(pack?.name), '', 'а') +
-              '&e&l!'
+              '&e&l за покупку доната &c&l"' +
+              pack?.name +
+              '"&e&l!'
           )
         })
         .on('response', (str) => {
