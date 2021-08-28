@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Rcon = require('rcon');
+const decline_word_1 = __importDefault(require("decline-word"));
 const Pack_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Pack"));
 const Setting_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Setting"));
 class PackGiverController {
@@ -30,8 +31,8 @@ class PackGiverController {
                 rcon.send(cmd);
                 rcon.send('broadcast &e&lСпасибо &a&l&n' +
                     nickname +
-                    '&e&l за покупку привилегии &c&l' +
-                    pack?.name +
+                    '&e&l за покупку  &c&l' +
+                    decline_word_1.default(1, String(pack?.name), '', 'а', 'ов') +
                     '&e&l!');
             })
                 .on('response', (str) => {
