@@ -169,7 +169,10 @@ export default class BuyController {
       }
 
       // Увеличиваем кол-во использований
-      if (promo) promo.used++ && (await promo.save())
+      if (promo) {
+        promo.used++
+        await promo.save()
+      }
 
       // Переадресовываем на оплату
       await response.redirect(redirectUri)
