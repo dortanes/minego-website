@@ -39,7 +39,7 @@ export default class FKPayController {
       const payment = await Payment.find(data.MERCHANT_ORDER_ID)
       if (!payment || payment.status !== 'created') throw 'PAYMENT_NOT_EXIST'
 
-      if (payment.amount !== parseInt(data.AMOUNT)) throw 'INCORRECT_AMOUNT'
+      if (payment.amount !== Number(data.AMOUNT)) throw 'INCORRECT_AMOUNT'
 
       await new PackGiverController().execute(payment)
 

@@ -34,7 +34,7 @@ export default class AnyPayController {
       const payment = await Payment.find(data.pay_id)
       if (!payment || payment.status !== 'created') throw 'PAYMENT_NOT_EXIST'
 
-      if (payment.amount !== parseInt(data.amount)) throw 'INCORRECT_AMOUNT'
+      if (payment.amount !== Number(data.amount)) throw 'INCORRECT_AMOUNT'
 
       await new PackGiverController().execute(payment)
 
