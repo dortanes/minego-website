@@ -15,7 +15,7 @@ class PackGiverController {
         const credentials = process.env.RCON?.split('@');
         const settings = await Setting_1.default.find(1);
         const commandToGive = pack?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd;
-        console.info('commandToGive =', commandToGive);
+        console.info('commandToGive =', commandToGive, 'settings =', settings, 'pack =', pack);
         const cmd = String(commandToGive)
             .replace('%nick', nickname)
             .replace('%group', String(pack?.group));
