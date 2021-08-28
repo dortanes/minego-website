@@ -13,7 +13,7 @@ export default class PackGiverController {
 
     const credentials: any = process.env.RCON?.split('@')
 
-    const settings = await Setting.find(1)
+    const settings = await Setting.query().where('id', '=', 1).first()
     const commandToGive = pack?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd
     console.info('commandToGive =', commandToGive, 'settings =', settings, 'pack =', pack)
 
