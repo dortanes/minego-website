@@ -13,9 +13,9 @@ class PackGiverController {
             .select(['group', 'name', 'case'])
             .first();
         const credentials = process.env.RCON?.split('@');
-        const settings = await Setting_1.default.query().where('id', '=', 1).first();
+        const settings = (await Setting_1.default.find(1))?.$extras;
         const commandToGive = pack?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd;
-        console.info('commandToGive =', commandToGive, 'settings =', settings?.toJSON(), 'pack =', pack?.toJSON());
+        console.info('commandToGive =', commandToGive, 'pack =', pack?.toJSON(), 'settings =', settings);
         if (!commandToGive)
             throw 'COMMAND_TO_GIVE_ERR';
         const cmd = String(commandToGive)
