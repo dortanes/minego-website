@@ -28,6 +28,7 @@
     "@adonisjs/lucid": "^15.0.3",
     "@adonisjs/repl": "^3.1.5",
     "@adonisjs/view": "^6.0.8",
+    "decline-word": "^1.4.0",
     "luxon": "^2.0.2",
     "mysql": "^2.18.1",
     "node-mc-api": "^1.2.1",
