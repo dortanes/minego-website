@@ -41,8 +41,8 @@ export default class PackGiverController {
           rcon.send(
             'broadcast &e&lСпасибо &a&l&n' +
               nickname +
-              '&e&l за покупку  &c&l' +
-              declineWord(1, String(pack?.name), '', 'а', 'ов') +
+              '&e&l за покупку &c&l' +
+              declineWord(1, String(pack?.name), '', 'а') +
               '&e&l!'
           )
         })
