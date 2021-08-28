@@ -14,8 +14,15 @@ export default class PackGiverController {
     const credentials: any = process.env.RCON?.split('@')
 
     const settings = (await Setting.find(1))?.$extras
+    console.log(
+      'boolean',
+      Boolean(pack?.toJSON()?.case),
+      'no boolean',
+      pack?.toJSON()?.case,
+      pack?.toJSON()
+    )
     const commandToGive =
-      pack?.toJSON()?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd
+      Boolean(pack?.toJSON()?.case) === true ? settings?.caseGiveCmd : settings?.donGiveCmd
     console.info('commandToGive =', commandToGive, 'pack =', pack?.toJSON(), 'settings =', settings)
 
     if (!commandToGive) throw 'COMMAND_TO_GIVE_ERR'
