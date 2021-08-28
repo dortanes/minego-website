@@ -15,7 +15,7 @@ export default class PackGiverController {
 
     const settings = await Setting.find(1)
     const commandToGive = pack?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd
-    console.info('commandToGive =', commandToGive)
+    console.info('commandToGive =', commandToGive, 'settings =', settings, 'pack =', pack)
 
     const cmd = String(commandToGive)
       .replace('%nick', nickname)
