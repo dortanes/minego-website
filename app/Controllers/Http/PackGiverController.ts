@@ -17,6 +17,8 @@ export default class PackGiverController {
     const commandToGive = pack?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd
     console.info('commandToGive =', commandToGive, 'settings =', settings, 'pack =', pack)
 
+    if (!commandToGive) throw 'COMMAND_TO_GIVE_ERR'
+
     const cmd = String(commandToGive)
       .replace('%nick', nickname)
       .replace('%group', String(pack?.group))
