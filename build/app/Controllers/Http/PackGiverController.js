@@ -5,11 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Rcon = require('rcon');
 const Pack_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Pack"));
+const Setting_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Setting"));
 class PackGiverController {
     async execute({ nickname, packId }) {
-        const pack = await Pack_1.default.query().where('id', '=', packId).select(['group', 'name']).first();
+        const pack = await Pack_1.default.query()
+            .where('id', '=', packId)
+            .select(['group', 'name', 'case'])
+            .first();
         const credentials = process.env.RCON?.split('@');
-        const cmd = String(process.env.RCON_CMD)
+        const settings = await Setting_1.default.find(1);
+        const commandToGive = pack?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd;
+        console.info('commandToGive =', commandToGive);
+        const cmd = String(commandToGive)
             .replace('%nick', nickname)
             .replace('%group', String(pack?.group));
         console.trace(credentials, cmd);

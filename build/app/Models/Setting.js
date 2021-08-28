@@ -11,43 +11,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const luxon_1 = require("luxon");
 const Orm_1 = global[Symbol.for('ioc.use')]("Adonis/Lucid/Orm");
-class Pack extends Orm_1.BaseModel {
+class Setting extends Orm_1.BaseModel {
 }
 __decorate([
     Orm_1.column({ isPrimary: true }),
     __metadata("design:type", Number)
-], Pack.prototype, "id", void 0);
+], Setting.prototype, "id", void 0);
 __decorate([
     Orm_1.column(),
     __metadata("design:type", String)
-], Pack.prototype, "name", void 0);
-__decorate([
-    Orm_1.column(),
-    __metadata("design:type", Number)
-], Pack.prototype, "amount", void 0);
-__decorate([
-    Orm_1.column(),
-    __metadata("design:type", Number)
-], Pack.prototype, "icon", void 0);
+], Setting.prototype, "donGiveCmd", void 0);
 __decorate([
     Orm_1.column(),
     __metadata("design:type", String)
-], Pack.prototype, "group", void 0);
-__decorate([
-    Orm_1.column(),
-    __metadata("design:type", Boolean)
-], Pack.prototype, "case", void 0);
-__decorate([
-    Orm_1.column(),
-    __metadata("design:type", Boolean)
-], Pack.prototype, "active", void 0);
+], Setting.prototype, "caseGiveCmd", void 0);
 __decorate([
     Orm_1.column.dateTime({ autoCreate: true }),
     __metadata("design:type", luxon_1.DateTime)
-], Pack.prototype, "createdAt", void 0);
+], Setting.prototype, "createdAt", void 0);
 __decorate([
     Orm_1.column.dateTime({ autoCreate: true, autoUpdate: true }),
     __metadata("design:type", luxon_1.DateTime)
-], Pack.prototype, "updatedAt", void 0);
-exports.default = Pack;
-//# sourceMappingURL=Pack.js.map
+], Setting.prototype, "updatedAt", void 0);
+exports.default = Setting;
+//# sourceMappingURL=Setting.js.map
