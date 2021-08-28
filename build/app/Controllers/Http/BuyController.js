@@ -159,8 +159,10 @@ class BuyController {
                 default:
                     throw 'Неизвестный оператор';
             }
-            if (promo)
-                promo.used++ && (await promo.save());
+            if (promo) {
+                promo.used++;
+                await promo.save();
+            }
             await response.redirect(redirectUri);
         }
         catch (err) {
