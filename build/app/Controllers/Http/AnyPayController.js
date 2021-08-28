@@ -31,7 +31,7 @@ class AnyPayController {
             const payment = await Payment_1.default.find(data.pay_id);
             if (!payment || payment.status !== 'created')
                 throw 'PAYMENT_NOT_EXIST';
-            if (payment.amount !== parseInt(data.amount))
+            if (payment.amount !== Number(data.amount))
                 throw 'INCORRECT_AMOUNT';
             await new PackGiverController_1.default().execute(payment);
             payment.kassaPaymentId = data.transaction_id;
