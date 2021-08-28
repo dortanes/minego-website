@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node ace build --production && cp -R public build/ && git add build -f && git commit -m 'Update' && git push",
+    "migrate": "node ace migration:run",
     "start": "NODE_ENV=production node server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",

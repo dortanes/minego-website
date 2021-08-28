@@ -11,7 +11,7 @@ Route_1.default.group(() => {
         Route_1.default.post('pm.hook.ap', 'AnyPayController.hook');
         Route_1.default.post('pm.hook.fk', 'FKPayController.hook');
     });
-    Route_1.default.get('ping', async () => (await node_mc_api_1.default.pingServer('172.18.0.1:25565'))?.players);
+    Route_1.default.get('ping', async () => (await node_mc_api_1.default.pingServer('172.18.0.1'))?.players);
 }).prefix('api');
 Route_1.default.get('/', async ({ view }) => view.render('home', {
     packs: await Pack_1.default.query().where('active', '=', true),
