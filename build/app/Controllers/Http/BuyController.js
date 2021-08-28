@@ -35,13 +35,11 @@ class BuyController {
                 if (!promo.active || promo.used === promo.limit)
                     throw 'Промокод недоступен';
             }
-            const price = promo ? pack.amount * (1 - promo.percent / 100) : pack.amount;
             return view.render('pay', {
                 nickname,
                 packId,
                 promoId,
                 pack,
-                price,
                 makeAnyPayLink: this.makeAnyPayLink,
             });
         }
