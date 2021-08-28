@@ -10,7 +10,7 @@ export default class Payments extends BaseSchema {
       table.integer('packId', 11)
       table.string('status').defaultTo('created')
       table.string('promocode')
-      table.integer('amount', 6)
+      table.decimal('amount', 9, 2)
       table.string('nickname', 20)
       table.integer('kassaPaymentId')
       table.string('email', 30)
