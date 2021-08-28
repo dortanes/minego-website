@@ -16,6 +16,7 @@ class Packs extends Schema_1.default {
             table.integer('amount');
             table.integer('icon');
             table.string('group');
+            table.boolean('case').defaultTo(false);
             table.boolean('active').defaultTo(true);
             table.timestamps(true, true);
         });
