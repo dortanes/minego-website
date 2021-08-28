@@ -1,14 +1,23 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import * as Rcon from "rcon"
+const Rcon = require('rcon')
 
 import Pack from 'App/Models/Pack'
+import Setting from 'App/Models/Setting'
 
 export default class PackGiverController {
   public async execute({ nickname, packId }) {
-    const pack = await Pack.query().where('id', '=', packId).select('group').first()
+    const pack = await Pack.query()
+      .where('id', '=', packId)
+      .select(['group', 'name', 'case'])
+      .first()
 
     const credentials: any = process.env.RCON?.split('@')
-    const cmd = String(process.env.RCON_CMD)
+
+    const settings = await Setting.find(1)
+    const commandToGive = pack?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd
+    console.info('commandToGive =', commandToGive)
+
+    const cmd = String(commandToGive)
       .replace('%nick', nickname)
       .replace('%group', String(pack?.group))
 
@@ -19,22 +28,33 @@ export default class PackGiverController {
         credentials[1].split(':')[0],
         Number(credentials[1].split(':')[1]),
         credentials[0]
-      ); 
+      )
 
-      rcon.on('auth', () => {
-        console.log("rcon >> authenticated! sending command", cmd);
-        rcon.send(cmd);
-      }).on('response', (str) => {
-        console.log('rcon >> response:', str);
-        resolve(true);
-      }).on('error', (err) => {
-        console.error(err);
-        reject(err);
-      }).on('end', () => {
-        console.log('rcon >> connection closed');
-      })
+      rcon
+        .on('auth', () => {
+          console.log('rcon >> authenticated! sending command', cmd)
+          rcon.send(cmd)
+          rcon.send(
+            'broadcast &e&lСпасибо &a&l&n' +
+              nickname +
+              '&e&l за покупку привилегии &c&l' +
+              pack?.name +
+              '&e&l!'
+          )
+        })
+        .on('response', (str) => {
+          console.log('rcon >> response:', str)
+          resolve(true)
+        })
+        .on('error', (err) => {
+          console.error(err)
+          reject(err)
+        })
+        .on('end', () => {
+          console.log('rcon >> connection closed')
+        })
 
-      rcon.connect();
+      rcon.connect()
     })
   }
 }

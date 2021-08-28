@@ -27,7 +27,7 @@ Route.group(() => {
     Route.post('pm.hook.ap', 'AnyPayController.hook')
     Route.post('pm.hook.fk', 'FKPayController.hook')
   })
-  Route.get('ping', async () => (await API.pingServer('172.18.0.1:25565'))?.players)
+  Route.get('ping', async () => (await API.pingServer('172.18.0.1'))?.players)
 }).prefix('api')
 
 Route.get('/', async ({ view }) =>

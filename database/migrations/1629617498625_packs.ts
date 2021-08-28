@@ -11,6 +11,7 @@ export default class Packs extends BaseSchema {
       table.integer('amount')
       table.integer('icon')
       table.string('group')
+      table.boolean('case').defaultTo(false)
       table.boolean('active').defaultTo(true)
 
       table.timestamps(true, true)
