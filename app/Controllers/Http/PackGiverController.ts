@@ -15,7 +15,14 @@ export default class PackGiverController {
 
     const settings = await Setting.query().where('id', '=', 1).first()
     const commandToGive = pack?.case === true ? settings?.caseGiveCmd : settings?.donGiveCmd
-    console.info('commandToGive =', commandToGive, 'settings =', settings, 'pack =', pack)
+    console.info(
+      'commandToGive =',
+      commandToGive,
+      'settings =',
+      settings?.toJSON(),
+      'pack =',
+      pack?.toJSON()
+    )
 
     if (!commandToGive) throw 'COMMAND_TO_GIVE_ERR'
 
