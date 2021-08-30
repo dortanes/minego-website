@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const Encryption_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Core/Encryption"));
 const Promocode_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Promocode"));
 const Pack_1 = __importDefault(require("../../Models/Pack"));
 const Payment_1 = __importDefault(require("../../Models/Payment"));
@@ -204,12 +205,13 @@ class BuyController {
     }
     makeMtsLink(price, id, pack) {
         const desc = 'Оплата привилегии "' + pack.name + '" на mineGO [' + id + ']';
+        const epvdk = Encryption_1.default.encrypt({ id, price, pack }, '6h');
         return ('https://yoomoney.ru/topup/mobile/phone-details?receiver=' +
             process.env.YOOMONEY_ID +
             '&sum=' +
             price +
-            '&successURL=https://minego.me/?pay_id=' +
-            id +
+            '&successURL=https://minego.me/api/pm.hook.ym/' +
+            epvdk +
             '&label=' +
             id +
             '&targets=' +

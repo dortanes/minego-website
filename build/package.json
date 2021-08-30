@@ -30,11 +30,13 @@
     "@adonisjs/view": "^6.0.8",
     "decline-word": "^1.4.0",
     "luxon": "^2.0.2",
+    "moment": "^2.29.1",
     "mysql": "^2.18.1",
     "node-mc-api": "^1.2.1",
     "proxy-addr": "^2.0.7",
     "rcon": "^1.0.4",
     "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.19"
+    "source-map-support": "^0.5.19",
+    "yoomoney-sdk": "^1.1.1"
   }
 }
