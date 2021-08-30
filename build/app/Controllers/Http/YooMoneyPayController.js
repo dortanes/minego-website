@@ -27,6 +27,7 @@ class YooMoneyPayController {
                 const operations = await ymClient.operationHistory({
                     records: 3,
                     type: 'deposition',
+                    from: time,
                 });
                 console.log(String(process.env.YOOMONEY_TOKEN), operations, time);
                 operations.operations.forEach((operation) => {
