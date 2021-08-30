@@ -1,7 +1,7 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Payment from "App/Models/Payment"
-import PackGiverController from "./PackGiverController"
+import Payment from 'App/Models/Payment'
+import PackGiverController from './PackGiverController'
 
 export default class YooMoneyPayController {
   public async hook({ request, response }) {
@@ -11,7 +11,13 @@ export default class YooMoneyPayController {
     try {
       if (data.test_notification !== false) throw 'IS_TEST'
       if (data.codepro === true) throw 'IS_CODEPRO'
-      if (!data.amount || !data.operation_id || !data.notification_type || !data.sha1_hash || !data.label)
+      if (
+        !data.amount ||
+        !data.operation_id ||
+        !data.notification_type ||
+        !data.sha1_hash ||
+        !data.label
+      )
         throw 'INCORRECT_BODY'
 
       const payload = {
@@ -26,7 +32,7 @@ export default class YooMoneyPayController {
         label: data.label,
       }
       console.log('payload =', payload)
-      
+
       const signature = require('crypto')
         .createHash('sha1')
         .update(Object.values(payload).join('&'))
@@ -55,4 +61,5 @@ export default class YooMoneyPayController {
       console.error(err, data)
       return response.status(500).send(err?.message ?? err)
     }
+  }
 }
