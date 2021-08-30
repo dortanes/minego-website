@@ -224,7 +224,9 @@ export default class BuyController {
       process.env.YOOMONEY_ID +
       '&sum=' +
       price +
-      '&successURL=https://minego.me/api/pm.hook.ym/&label=' +
+      '&successURL=https://minego.me/?pay_id=' +
+      id +
+      '&label=' +
       id +
       '&targets=' +
       desc +
