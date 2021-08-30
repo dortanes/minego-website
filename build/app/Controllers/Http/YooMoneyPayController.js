@@ -29,7 +29,7 @@ class YooMoneyPayController {
                     type: 'deposition',
                     from: time,
                 });
-                console.log(String(process.env.YOOMONEY_TOKEN), operations);
+                console.log(String(process.env.YOOMONEY_TOKEN), operations, time);
                 operations.operations.forEach((operation) => {
                     if (operation.amount === price)
                         ymPayment = operation;
