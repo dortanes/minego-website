@@ -10,7 +10,7 @@ Route_1.default.group(() => {
     Route_1.default.group(() => {
         Route_1.default.post('pm.hook.ap', 'AnyPayController.hook');
         Route_1.default.post('pm.hook.fk', 'FKPayController.hook');
-        Route_1.default.get('pm.hook.ym', 'YooMoneyPayController.hook');
+        Route_1.default.post('pm.hook.ym', 'YooMoneyPayController.hook');
     });
     Route_1.default.get('ping', async () => (await node_mc_api_1.default.pingServer('172.18.0.1'))?.players);
 }).prefix('api');
