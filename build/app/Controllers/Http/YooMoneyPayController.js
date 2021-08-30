@@ -10,7 +10,7 @@ class YooMoneyPayController {
         const data = request.body();
         console.trace(data);
         try {
-            if (data.test_notification !== false)
+            if (Boolean(data.test_notification) !== false)
                 throw 'IS_TEST';
             if (data.codepro === true)
                 throw 'IS_CODEPRO';
