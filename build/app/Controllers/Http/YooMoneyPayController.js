@@ -29,6 +29,7 @@ class YooMoneyPayController {
                     type: 'deposition',
                     from: time,
                 });
+                console.log(operations);
                 operations.operations.forEach((operation) => {
                     if (operation.amount === price)
                         ymPayment = operation;
