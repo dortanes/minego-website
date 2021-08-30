@@ -1,65 +1,70 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
+import { Request, Response } from '@adonisjs/core/build/standalone'
+import Encryption from '@ioc:Adonis/Core/Encryption'
+import { YMApi } from 'yoomoney-sdk'
+import moment from 'moment'
 import Payment from 'App/Models/Payment'
 import PackGiverController from './PackGiverController'
+import { Operation } from 'yoomoney-sdk/dist/api.types'
+
+type Nullable<T> = T | undefined | null
 
 export default class YooMoneyPayController {
-  public async hook({ request, response }) {
-    const data = request.body()
-    console.trace(data)
+  public async hook({ request, response }: { request: Request; response: Response }) {
+    const { epvdk } = request.params()
+    const { id: payId, price, pack }: any = Encryption.decrypt(epvdk)
 
     try {
-      if (Boolean(data.test_notification) !== false) throw 'IS_TEST'
-      if (data.codepro === true) throw 'IS_CODEPRO'
-      if (
-        !data.amount ||
-        !data.operation_id ||
-        !data.notification_type ||
-        !data.sha1_hash ||
-        !data.label
-      )
-        throw 'INCORRECT_BODY'
+      if (!payId || !price || !pack) throw 'Неверное тело.'
 
-      const payload = {
-        notification_type: data.notification_type,
-        operation_id: data.operation_id,
-        amount: data.amount,
-        currency: data.currency,
-        datetime: data.datetime,
-        sender: data.sender,
-        codepro: data.codepro,
-        notification_secret: process.env.YOOMONEY_SECRET,
-        label: data.label,
+      const payment = await Payment.find(payId)
+      if (!payment || payment.status !== 'created') throw 'Платёж не существует.'
+
+      if (payment.amount !== Number(price)) throw 'Неверная сумма.'
+
+      // Запрашиваем инфу о платежах из YooMoney
+      const ymClient = new YMApi(String(process.env.YOOMONEY_TOKEN))
+      const time = moment().subtract(2, 'minutes').toISOString()
+      let ymPayment: Nullable<Operation>
+
+      for (let i = 0; i < 2; i++) {
+        // Запрашиваем историю операций
+        const operations = await ymClient.operationHistory({
+          records: 3,
+          type: 'deposition',
+          from: time,
+        })
+
+        operations.operations.forEach((operation) => {
+          if (operation.amount === price) ymPayment = operation
+        })
+
+        if (!ymPayment)
+          await new Promise((resolve: CallableFunction) => {
+            setTimeout(() => {
+              resolve()
+            }, 3000)
+          })
+        else i = 2
       }
-      console.log('payload =', payload)
 
-      const signature = require('crypto')
-        .createHash('sha1')
-        .update(Object.values(payload).join('&'))
-        .digest('hex')
+      if (!ymPayment) throw 'Платёж не найден.'
 
-      if (data.sha1_hash !== signature) throw 'SIGNATURE_INCORRECT'
-
-      const payment = await Payment.find(Number(data.label))
-      if (!payment || payment.status !== 'created') throw 'PAYMENT_NOT_EXIST'
-
-      if (payment.amount !== Number(data.amount)) throw 'INCORRECT_AMOUNT'
-
-      await new PackGiverController().execute(payment)
+      await await new PackGiverController().execute(payment)
 
       // Финишируем платёж
-      payment.kassaPaymentId = data.operation_id
-      payment.email = data.email
-      payment.phone = data.phone
-      payment.currencyId = data.currency
-      payment.wallet = data.sender
+      payment.kassaPaymentId = Number(ymPayment.operation_id)
+      payment.wallet = String(ymPayment.sender)
       payment.status = 'finished'
       await payment.save()
 
       return 'OK'
     } catch (err) {
-      console.error(err, data)
-      return response.status(500).send(err?.message ?? err)
+      console.error(err, { epvdk, payId, price, pack })
+      return response
+        .status(500)
+        .send((err?.message ?? err) + ' Обратись в поддержку: https://vk.com/minegomc')
     }
   }
 }

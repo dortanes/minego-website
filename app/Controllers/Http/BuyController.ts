@@ -1,5 +1,6 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
+import Encryption from '@ioc:Adonis/Core/Encryption'
 import Promocode from 'App/Models/Promocode'
 import Pack from '../../Models/Pack'
 import Payment from '../../Models/Payment'
@@ -219,13 +220,14 @@ export default class BuyController {
 
   private makeMtsLink(price: number, id: number, pack: Pack) {
     const desc = 'Оплата привилегии "' + pack.name + '" на mineGO [' + id + ']'
+    const epvdk = Encryption.encrypt({ id, price, pack }, '6h')
     return (
       'https://yoomoney.ru/topup/mobile/phone-details?receiver=' +
       process.env.YOOMONEY_ID +
       '&sum=' +
       price +
-      '&successURL=https://minego.me/?pay_id=' +
-      id +
+      '&successURL=https://minego.me/api/pm.hook.ym/' +
+      epvdk +
       '&label=' +
       id +
       '&targets=' +
