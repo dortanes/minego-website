@@ -50,13 +50,13 @@ class YooMoneyPayController {
             payment.wallet = String(ymPayment.sender);
             payment.status = 'finished';
             await payment.save();
-            return 'OK';
+            return response.status(200).redirect('/?pay_id=1');
         }
         catch (err) {
             console.error(err, { epvdk, payId, price, pack });
             return response
                 .status(500)
-                .send((err?.message ?? err) + ' Обратись в поддержку: https://vk.com/minegomc');
+                .redirect('/?error=' + (err?.message ?? err) + ' Обратись в поддержку: https://vk.com/minegomc');
         }
     }
 }
