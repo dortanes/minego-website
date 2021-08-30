@@ -9,7 +9,7 @@ export default class YooMoneyPayController {
     console.trace(data)
 
     try {
-      if (data.test_notification !== false) throw 'IS_TEST'
+      if (Boolean(data.test_notification) !== false) throw 'IS_TEST'
       if (data.codepro === true) throw 'IS_CODEPRO'
       if (
         !data.amount ||
