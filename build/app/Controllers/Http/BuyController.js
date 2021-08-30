@@ -51,7 +51,7 @@ class BuyController {
     async pay({ request, response }) {
         const data = request.all();
         const params = request.params();
-        let promo;
+        let promo = null;
         try {
             const nickname = data.nickname ?? params.nickname;
             const packId = Number(data.id_pack ?? params.id);
@@ -117,6 +117,12 @@ class BuyController {
                 case 'beel':
                     redirectUri = this.makeAnyPayLink(price, payment.id, 'beeline', pack);
                     break;
+                case 'mts':
+                    redirectUri = this.makeMtsLink(price, payment.id, pack);
+                    break;
+                case 'tele2':
+                    redirectUri = this.makeMtsLink(price, payment.id, pack);
+                    break;
                 case 'term':
                     redirectUri = this.makeAnyPayLink(price, payment.id, 'term', pack);
                     break;
@@ -160,7 +166,7 @@ class BuyController {
                     throw 'Неизвестный оператор';
             }
             if (promo) {
-                promo.used++;
+                promo.used = promo.used + 1;
                 await promo.save();
             }
             await response.redirect(redirectUri);
@@ -195,6 +201,22 @@ class BuyController {
             method +
             '&sign=' +
             sign);
+    }
+    makeMtsLink(price, id, pack) {
+        const desc = 'Оплата привилегии "' + pack.name + '" на mineGO [' + id + ']';
+        return ('https://yoomoney.ru/topup/mobile/phone-details?receiver=' +
+            process.env.YOOMONEY_ID +
+            '&sum=' +
+            price +
+            '&successURL=https://minego.me/api/pm.hook.ym/&label=' +
+            id +
+            '&targets=' +
+            desc +
+            '&origin=form&selectedPaymentType=MC&destination=' +
+            desc +
+            '&form-comment=' +
+            desc +
+            '&quickpay-form=shop');
     }
 }
 exports.default = BuyController;
