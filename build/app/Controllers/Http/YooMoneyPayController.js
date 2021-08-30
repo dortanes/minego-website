@@ -54,9 +54,7 @@ class YooMoneyPayController {
         }
         catch (err) {
             console.error(err, { epvdk, payId, price, pack });
-            return response
-                .status(500)
-                .redirect('/?error=' + (err?.message ?? err) + ' Обратись в поддержку: https://vk.com/minegomc');
+            return response.redirect('/?error=' + (err?.message ?? err) + ' Обратись в поддержку: https://vk.com/minegomc', true);
         }
     }
 }
