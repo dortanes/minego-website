@@ -48,6 +48,16 @@
 				<div class="description">
 					<h4 class="name">Билайн</h4><span class="category">Мобильные платежи</span></div>
 			</div>
+			<div class="method" onclick="location.href = '/pay/mts/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/mts.png">
+				<div class="description">
+					<h4 class="name">МТС</h4><span class="category">Мобильные платежи</span></div>
+			</div>
+			<div class="method" onclick="location.href = '/pay/tele2/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
+                <img class="image" src="/payment/tele2.png">
+				<div class="description">
+					<h4 class="name">Теле2</h4><span class="category">Мобильные платежи</span></div>
+			</div>
 			<div class="method" onclick="location.href = '/pay/term/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}'">
                 <img class="image" src="/payment/term.png">
 				<div class="description">

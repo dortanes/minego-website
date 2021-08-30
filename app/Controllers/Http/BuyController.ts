@@ -49,7 +49,7 @@ export default class BuyController {
     const data = request.all()
     const params = request.params()
 
-    let promo
+    let promo: Promocode | null = null
 
     try {
       const nickname = data.nickname ?? params.nickname
@@ -119,6 +119,12 @@ export default class BuyController {
         case 'beel':
           redirectUri = this.makeAnyPayLink(price, payment.id, 'beeline', pack)
           break
+        case 'mts':
+          redirectUri = this.makeMtsLink(price, payment.id, pack)
+          break
+        case 'tele2':
+          redirectUri = this.makeMtsLink(price, payment.id, pack)
+          break
         case 'term':
           redirectUri = this.makeAnyPayLink(price, payment.id, 'term', pack)
           break
@@ -170,7 +176,7 @@ export default class BuyController {
 
       // Увеличиваем кол-во использований
       if (promo) {
-        promo.used++
+        promo.used = promo.used + 1
         await promo.save()
       }
 
@@ -208,6 +214,25 @@ export default class BuyController {
       method +
       '&sign=' +
       sign
+    )
+  }
+
+  private makeMtsLink(price: number, id: number, pack: Pack) {
+    const desc = 'Оплата привилегии "' + pack.name + '" на mineGO [' + id + ']'
+    return (
+      'https://yoomoney.ru/topup/mobile/phone-details?receiver=' +
+      process.env.YOOMONEY_ID +
+      '&sum=' +
+      price +
+      '&successURL=https://minego.me/api/pm.hook.ym/&label=' +
+      id +
+      '&targets=' +
+      desc +
+      '&origin=form&selectedPaymentType=MC&destination=' +
+      desc +
+      '&form-comment=' +
+      desc +
+      '&quickpay-form=shop'
     )
   }
 }
