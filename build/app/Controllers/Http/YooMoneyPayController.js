@@ -27,17 +27,25 @@ class YooMoneyPayController {
                 const operation = operations.operations.find((operation) => operation.amount === payment.amount && operation.title.indexOf('МТС') !== -1);
                 if (!operation)
                     throw 'OPERATION_NOT_FOUND';
-                const timeDiff = moment_1.default(operation.datetime)
+                const timeDiff = moment_1.default(payment.$extras.created_at)
                     .add(3, 'hours')
-                    .diff(moment_1.default(payment.$extras.created_at), 'hours');
+                    .diff(moment_1.default(operation.datetime), 'hours');
                 console.log('[CHECK LOG] timeDiff =', timeDiff);
+                console.log(('OLD_RECORD: ' +
+                    timeDiff +
+                    'h; DateTime: ' +
+                    moment_1.default(operation.datetime).add(3, 'hours').toISOString() +
+                    '; CreatedAt: ' +
+                    payment.$extras.created_at,
+                    moment_1.default(payment.$extras.created_at).toISOString()));
                 if (timeDiff > 3)
-                    throw ('OLD_RECORD: ' +
+                    throw (('OLD_RECORD: ' +
                         timeDiff +
                         'h; DateTime: ' +
                         moment_1.default(operation.datetime).add(3, 'hours').toISOString() +
                         '; CreatedAt: ' +
-                        moment_1.default(payment.$extras.created_at).toISOString());
+                        payment.$extras.created_at,
+                        moment_1.default(payment.$extras.created_at).toISOString()));
                 const phone = Number(operation.details?.split('телефона ')[1].split(',')[0]);
                 await new PackGiverController_1.default().execute(payment);
                 payment.kassaPaymentId = Number(operation.operation_id);
