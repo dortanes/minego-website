@@ -36,7 +36,15 @@ export default class YooMoneyPayController {
 
         // Чекаем разницу во времени
         const timeDiff = moment(operation.datetime).diff(payment.createdAt, 'hours')
-        if (timeDiff > 3) throw 'OLD_RECORD'
+        if (timeDiff > 3)
+          throw (
+            'OLD_RECORD: ' +
+            timeDiff +
+            'h; DateTime: ' +
+            operation.datetime +
+            '; CreatedAt: ' +
+            payment.createdAt
+          )
 
         // Вытаскиваем номер телефона
         const phone = Number(operation.details?.split('телефона ')[1].split(',')[0])
