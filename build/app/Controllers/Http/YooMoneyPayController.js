@@ -27,7 +27,7 @@ class YooMoneyPayController {
                 const operation = operations.operations.find((operation) => operation.amount === payment.amount && operation.title.indexOf('МТС') !== -1);
                 if (!operation)
                     throw 'OPERATION_NOT_FOUND';
-                const timeDiff = moment_1.default(operation.datetime).diff(payment.createdAt, 'hours');
+                const timeDiff = moment_1.default(operation.datetime).diff(moment_1.default(payment.createdAt), 'hours');
                 if (timeDiff > 3)
                     throw ('OLD_RECORD: ' +
                         timeDiff +
