@@ -9,7 +9,7 @@ const ymClient = new YMApi(String(process.env.YOOMONEY_TOKEN))
 
 export default class YooMoneyPayController {
   public async checkPayments() {
-    const whereTime = moment().subtract(3, 'hours').toISOString()
+    const whereTime = moment().subtract(4, 'hours').toISOString()
 
     const createdPayments = await Payment.query()
       .where('operator', '=', 'mts')
@@ -25,6 +25,9 @@ export default class YooMoneyPayController {
       details: true,
     })
 
+    console.log('Pending payments: ' + createdPayments.length)
+    console.log('Operations: ' + operations.operations.length)
+
     createdPayments.forEach(async (payment) => {
       try {
         // Ищем похожую операцию
@@ -35,19 +38,17 @@ export default class YooMoneyPayController {
         if (!operation) throw 'OPERATION_NOT_FOUND'
 
         // Чекаем разницу во времени
-        const timeDiff = moment(operation.datetime).diff(
-          moment(payment.createdAt).toISOString(),
-          'hours'
+        const paymentDate = moment(payment.createdAt.toUTC().toISO())
+        const operationDate = moment(operation.datetime)
+        const dateDiff = operationDate.diff(paymentDate, 'hours')
+
+        console.log(
+          '[CHECK LOG] timeDiff =',
+          dateDiff,
+          paymentDate.toISOString(),
+          operationDate.toISOString()
         )
-        if (timeDiff > 3)
-          throw (
-            'OLD_RECORD: ' +
-            timeDiff +
-            'h; DateTime: ' +
-            operation.datetime +
-            '; CreatedAt: ' +
-            moment(payment.createdAt).toISOString()
-          )
+        if (dateDiff > 1) throw 'OLD_RECORD [' + dateDiff + ']'
 
         // Вытаскиваем номер телефона
         const phone = Number(operation.details?.split('телефона ')[1].split(',')[0])

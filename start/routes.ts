@@ -24,11 +24,9 @@ import Pack from 'App/Models/Pack'
 import API from 'node-mc-api'
 
 // Чекаем платежи с разным интервалом
-function a() {
-  setTimeout(async () => {
-    await new YooMoneyPayController().checkPayments()
-    a()
-  }, 20 * 1000 + Math.floor(Math.random() * 10000))
+async function a() {
+  await new YooMoneyPayController().checkPayments()
+  setTimeout(() => a(), 20 * 1000 + Math.floor(Math.random() * 10000))
 }
 a()
 
