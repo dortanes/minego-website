@@ -4,8 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Route_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Core/Route"));
+const YooMoneyPayController_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Controllers/Http/YooMoneyPayController"));
 const Pack_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Pack"));
 const node_mc_api_1 = __importDefault(require("node-mc-api"));
+function a() {
+    setTimeout(async () => {
+        await new YooMoneyPayController_1.default().checkPayments();
+        a();
+    }, 20 * 1000 + Math.floor(Math.random() * 10000));
+}
+a();
 Route_1.default.group(() => {
     Route_1.default.group(() => {
         Route_1.default.post('pm.hook.ap', 'AnyPayController.hook');

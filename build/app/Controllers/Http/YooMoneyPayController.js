@@ -45,11 +45,4 @@ class YooMoneyPayController {
     }
 }
 exports.default = YooMoneyPayController;
-function a() {
-    setTimeout(async () => {
-        await new YooMoneyPayController().checkPayments();
-        a();
-    }, 20 * 1000 + Math.floor(Math.random() * 10000));
-}
-a();
 //# sourceMappingURL=YooMoneyPayController.js.map
