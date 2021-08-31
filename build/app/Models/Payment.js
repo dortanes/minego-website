@@ -38,6 +38,10 @@ __decorate([
     __metadata("design:type", String)
 ], Payment.prototype, "nickname", void 0);
 __decorate([
+    Orm_1.column(),
+    __metadata("design:type", String)
+], Payment.prototype, "operator", void 0);
+__decorate([
     Orm_1.column({ columnName: 'kassaPaymentId' }),
     __metadata("design:type", Number)
 ], Payment.prototype, "kassaPaymentId", void 0);

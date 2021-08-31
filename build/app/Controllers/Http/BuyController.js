@@ -83,6 +83,7 @@ class BuyController {
                 packId: packId,
                 promocode: promoId,
                 amount: price,
+                operator,
                 nickname,
             });
             let redirectUri;
