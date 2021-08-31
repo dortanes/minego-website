@@ -10,7 +10,7 @@ const PackGiverController_1 = __importDefault(require("./PackGiverController"));
 const ymClient = new yoomoney_sdk_1.YMApi(String(process.env.YOOMONEY_TOKEN));
 class YooMoneyPayController {
     async checkPayments() {
-        const whereTime = moment_1.default().subtract(1, 'hours').toISOString();
+        const whereTime = moment_1.default().subtract(4, 'hours').toISOString();
         const createdPayments = await Payment_1.default.query()
             .where('operator', '=', 'mts')
             .andWhere('status', '=', 'created')
