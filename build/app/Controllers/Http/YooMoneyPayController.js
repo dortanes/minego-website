@@ -27,8 +27,7 @@ class YooMoneyPayController {
                 const operation = operations.operations.find((operation) => operation.amount === payment.amount && operation.title.indexOf('МТС') !== -1);
                 if (!operation)
                     throw 'OPERATION_NOT_FOUND';
-                let paymentDate = moment_1.default(payment.createdAt);
-                paymentDate = paymentDate.subtract(paymentDate.parseZone().utcOffset(), 'minutes');
+                const paymentDate = moment_1.default(payment.createdAt.toUTC().toISO());
                 const operationDate = moment_1.default(operation.datetime);
                 const dateDiff = paymentDate.diff(operationDate, 'hours');
                 console.log('[CHECK LOG] timeDiff =', dateDiff, paymentDate.toISOString(), operationDate.toISOString());
