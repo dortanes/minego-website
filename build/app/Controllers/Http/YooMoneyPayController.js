@@ -28,7 +28,7 @@ class YooMoneyPayController {
                 if (!operation)
                     throw 'OPERATION_NOT_FOUND';
                 const timeDiff = moment_1.default(payment.createdAt)
-                    .add(3, 'hours')
+                    .add(13, 'hours')
                     .diff(moment_1.default(operation.datetime), 'hours');
                 console.log('[CHECK LOG] timeDiff =', timeDiff);
                 console.log(('OLD_RECORD: ' +
