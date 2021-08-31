@@ -56,12 +56,3 @@ export default class YooMoneyPayController {
     })
   }
 }
-
-// Чекаем платежи с разным интервалом
-function a() {
-  setTimeout(async () => {
-    await new YooMoneyPayController().checkPayments()
-    a()
-  }, 20 * 1000 + Math.floor(Math.random() * 10000))
-}
-a()
