@@ -22,6 +22,8 @@ class YooMoneyPayController {
             from: whereTime,
             details: true,
         });
+        console.log('Pending payments: ' + createdPayments.length);
+        console.log('Operations: ' + operations.operations.length);
         createdPayments.forEach(async (payment) => {
             try {
                 const operation = operations.operations.find((operation) => operation.amount === payment.amount && operation.title.indexOf('МТС') !== -1);
