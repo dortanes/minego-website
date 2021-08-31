@@ -29,11 +29,11 @@ class PackGiverController {
                 .on('auth', () => {
                 console.log('rcon >> authenticated! sending command', cmd);
                 rcon.send(cmd);
-                rcon.send('broadcast &e&lСпасибо &a&l&n' +
+                rcon.send('bossbar msg:"&eСпасибо &c' +
                     nickname +
-                    '&e&l за покупку доната &c&l"' +
+                    '&e за покупку доната &a&l' +
                     pack?.name +
-                    '"&e&l!');
+                    '&e!" time:30 player:@a');
             })
                 .on('response', (str) => {
                 console.log('rcon >> response:', str);
