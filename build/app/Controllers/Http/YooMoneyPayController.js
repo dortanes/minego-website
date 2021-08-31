@@ -39,13 +39,14 @@ class YooMoneyPayController {
                     payment.$extras.created_at,
                     moment_1.default(payment.$extras.created_at).toISOString()));
                 if (timeDiff > 3)
-                    throw (('OLD_RECORD: ' +
+                    throw ('OLD_RECORD: ' +
                         timeDiff +
                         'h; DateTime: ' +
                         moment_1.default(operation.datetime).add(3, 'hours').toISOString() +
                         '; CreatedAt: ' +
-                        payment.$extras.created_at,
-                        moment_1.default(payment.$extras.created_at).toISOString()));
+                        payment.$extras.created_at +
+                        ' ' +
+                        moment_1.default(payment.$extras.created_at).toISOString());
                 const phone = Number(operation.details?.split('телефона ')[1].split(',')[0]);
                 await new PackGiverController_1.default().execute(payment);
                 payment.kassaPaymentId = Number(operation.operation_id);
