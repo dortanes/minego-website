@@ -29,14 +29,14 @@ class YooMoneyPayController {
                     throw 'OPERATION_NOT_FOUND';
                 const timeDiff = moment_1.default(operation.datetime)
                     .add(3, 'hours')
-                    .diff(moment_1.default(payment.createdAt), 'hours');
+                    .diff(moment_1.default(payment.$extras.created_at), 'hours');
                 if (timeDiff > 3)
                     throw ('OLD_RECORD: ' +
                         timeDiff +
                         'h; DateTime: ' +
                         moment_1.default(operation.datetime).add(3, 'hours').toISOString() +
                         '; CreatedAt: ' +
-                        moment_1.default(payment.createdAt).toISOString());
+                        moment_1.default(payment.$extras.created_at).toISOString());
                 const phone = Number(operation.details?.split('телефона ')[1].split(',')[0]);
                 await new PackGiverController_1.default().execute(payment);
                 payment.kassaPaymentId = Number(operation.operation_id);
