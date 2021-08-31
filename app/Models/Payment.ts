@@ -20,6 +20,9 @@ export default class Payment extends BaseModel {
   @column()
   public nickname: string
 
+  @column()
+  public operator: string
+
   @column({ columnName: 'kassaPaymentId' })
   public kassaPaymentId: number
 

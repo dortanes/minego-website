@@ -26,7 +26,6 @@ Route.group(() => {
   Route.group(() => {
     Route.post('pm.hook.ap', 'AnyPayController.hook')
     Route.post('pm.hook.fk', 'FKPayController.hook')
-    Route.get('pm.hook.ym/:epvdk', 'YooMoneyPayController.hook')
   })
   Route.get('ping', async () => (await API.pingServer('172.18.0.1'))?.players)
 }).prefix('api')

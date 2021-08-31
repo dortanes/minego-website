@@ -1,70 +1,67 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import { Request, Response } from '@adonisjs/core/build/standalone'
-import Encryption from '@ioc:Adonis/Core/Encryption'
 import { YMApi } from 'yoomoney-sdk'
 import moment from 'moment'
 import Payment from 'App/Models/Payment'
 import PackGiverController from './PackGiverController'
-import { Operation } from 'yoomoney-sdk/dist/api.types'
 
-type Nullable<T> = T | undefined | null
+const ymClient = new YMApi(String(process.env.YOOMONEY_TOKEN))
 
 export default class YooMoneyPayController {
-  public async hook({ request, response }: { request: Request; response: Response }) {
-    const { epvdk } = request.params()
-    const { id: payId, price, pack }: any = Encryption.decrypt(epvdk)
+  public async checkPayments() {
+    const whereTime = moment().subtract(3, 'hours').toISOString()
 
-    try {
-      if (!payId || !price || !pack) throw 'Неверное тело.'
+    const createdPayments = await Payment.query()
+      .where('operator', '=', 'mts')
+      .andWhere('status', '=', 'created')
+      .andWhere('created_at', '>', whereTime)
+      .limit(3)
 
-      const payment = await Payment.find(payId)
-      if (!payment || payment.status !== 'created') throw 'Платёж не существует.'
+    // Запрашиваем историю операций
+    const operations = await ymClient.operationHistory({
+      records: 3,
+      type: 'deposition',
+      from: whereTime,
+      details: true,
+    })
 
-      if (payment.amount !== Number(price)) throw 'Неверная сумма.'
+    createdPayments.forEach(async (payment) => {
+      try {
+        // Ищем похожую операцию
+        const operation = operations.operations.find(
+          (operation) =>
+            operation.amount === payment.amount && operation.title.indexOf('МТС') !== -1
+        )
+        if (!operation) throw 'OPERATION_NOT_FOUND'
 
-      // Запрашиваем инфу о платежах из YooMoney
-      const ymClient = new YMApi(String(process.env.YOOMONEY_TOKEN))
-      const time = moment().subtract(2, 'minutes').toISOString()
-      let ymPayment: Nullable<Operation>
+        // Чекаем разницу во времени
+        const timeDiff = moment(operation.datetime).diff(payment.createdAt, 'hours')
+        if (timeDiff > 3) throw 'OLD_RECORD'
 
-      for (let i = 0; i < 2; i++) {
-        // Запрашиваем историю операций
-        const operations = await ymClient.operationHistory({
-          records: 3,
-          type: 'deposition',
-          from: time,
-        })
+        // Вытаскиваем номер телефона
+        const phone = Number(operation.details?.split('телефона ')[1].split(',')[0])
 
-        operations.operations.forEach((operation) => {
-          if (operation.amount === price) ymPayment = operation
-        })
+        // Выдаём товар
+        await new PackGiverController().execute(payment)
 
-        if (!ymPayment)
-          await new Promise((resolve: CallableFunction) => {
-            setTimeout(() => {
-              resolve()
-            }, 3000)
-          })
-        else i = 2
+        // Финишируем платёж
+        payment.kassaPaymentId = Number(operation.operation_id)
+        payment.phone = phone
+        payment.wallet = String(operation.sender ?? phone)
+        payment.status = 'finished'
+        await payment.save()
+      } catch (err) {
+        console.error('[ERROR] PaymentID: ' + payment.id + ':', err)
       }
-
-      if (!ymPayment) throw 'Платёж не найден.'
-
-      await await new PackGiverController().execute(payment)
-
-      // Финишируем платёж
-      payment.kassaPaymentId = Number(ymPayment.operation_id)
-      payment.wallet = String(ymPayment.sender)
-      payment.status = 'finished'
-      await payment.save()
-
-      return 'OK'
-    } catch (err) {
-      console.error(err, { epvdk, payId, price, pack })
-      return response
-        .status(500)
-        .send((err?.message ?? err) + ' Обратись в поддержку: https://vk.com/minegomc')
-    }
+    })
   }
 }
+
+// Чекаем платежи с разным интервалом
+function a() {
+  setTimeout(async () => {
+    await new YooMoneyPayController().checkPayments()
+    a()
+  }, 20 * 1000 + Math.floor(Math.random() * 10000))
+}
+a()

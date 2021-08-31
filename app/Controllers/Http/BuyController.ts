@@ -80,6 +80,7 @@ export default class BuyController {
         packId: packId,
         promocode: promoId,
         amount: price,
+        operator,
         nickname,
       })
 
