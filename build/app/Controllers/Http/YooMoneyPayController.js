@@ -30,6 +30,7 @@ class YooMoneyPayController {
                 const timeDiff = moment_1.default(operation.datetime)
                     .add(3, 'hours')
                     .diff(moment_1.default(payment.$extras.created_at), 'hours');
+                console.log('[CHECK LOG] timeDiff =', timeDiff);
                 if (timeDiff > 3)
                     throw ('OLD_RECORD: ' +
                         timeDiff +
