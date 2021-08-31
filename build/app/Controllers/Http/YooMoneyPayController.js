@@ -29,7 +29,7 @@ class YooMoneyPayController {
                     throw 'OPERATION_NOT_FOUND';
                 const paymentDate = moment_1.default(payment.createdAt.toUTC().toISO());
                 const operationDate = moment_1.default(operation.datetime);
-                const dateDiff = paymentDate.diff(operationDate, 'hours');
+                const dateDiff = operationDate.diff(paymentDate, 'hours');
                 console.log('[CHECK LOG] timeDiff =', dateDiff, paymentDate.toISOString(), operationDate.toISOString());
                 if (dateDiff > 1)
                     throw 'OLD_RECORD [' + dateDiff + ']';
