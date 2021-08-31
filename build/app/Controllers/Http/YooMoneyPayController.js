@@ -36,7 +36,7 @@ class YooMoneyPayController {
                     'h; DateTime: ' +
                     moment_1.default(operation.datetime).add(3, 'hours').toISOString() +
                     '; CreatedAt: ' +
-                    payment.$extras.created_at,
+                    payment.createdAt,
                     moment_1.default(payment.createdAt).toISOString()));
                 if (timeDiff > 3)
                     throw ('OLD_RECORD: ' +
