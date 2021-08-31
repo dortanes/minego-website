@@ -10,7 +10,7 @@ const PackGiverController_1 = __importDefault(require("./PackGiverController"));
 const ymClient = new yoomoney_sdk_1.YMApi(String(process.env.YOOMONEY_TOKEN));
 class YooMoneyPayController {
     async checkPayments() {
-        const whereTime = moment_1.default().subtract(3, 'hours').toISOString();
+        const whereTime = moment_1.default().subtract(1, 'hours').toISOString();
         const createdPayments = await Payment_1.default.query()
             .where('operator', '=', 'mts')
             .andWhere('status', '=', 'created')
@@ -27,26 +27,12 @@ class YooMoneyPayController {
                 const operation = operations.operations.find((operation) => operation.amount === payment.amount && operation.title.indexOf('МТС') !== -1);
                 if (!operation)
                     throw 'OPERATION_NOT_FOUND';
-                const timeDiff = moment_1.default(payment.createdAt)
-                    .add(13, 'hours')
-                    .diff(moment_1.default(operation.datetime), 'hours');
-                console.log('[CHECK LOG] timeDiff =', timeDiff);
-                console.log(('OLD_RECORD: ' +
-                    timeDiff +
-                    'h; DateTime: ' +
-                    moment_1.default(operation.datetime).add(3, 'hours').toISOString() +
-                    '; CreatedAt: ' +
-                    payment.createdAt,
-                    moment_1.default(payment.createdAt).toISOString()));
-                if (timeDiff > 3)
-                    throw ('OLD_RECORD: ' +
-                        timeDiff +
-                        'h; DateTime: ' +
-                        moment_1.default(operation.datetime).add(3, 'hours').toISOString() +
-                        '; CreatedAt: ' +
-                        payment.$extras.created_at +
-                        ' ' +
-                        moment_1.default(payment.$extras.created_at).toISOString());
+                const paymentDate = moment_1.default(payment.createdAt);
+                const operationDate = moment_1.default(operation.datetime);
+                const dateDiff = paymentDate.diff(operationDate, 'hours');
+                console.log('[CHECK LOG] timeDiff =', dateDiff, paymentDate.toISOString(), operationDate.toISOString());
+                if (dateDiff > 1)
+                    throw 'OLD_RECORD [' + dateDiff + ']';
                 const phone = Number(operation.details?.split('телефона ')[1].split(',')[0]);
                 await new PackGiverController_1.default().execute(payment);
                 payment.kassaPaymentId = Number(operation.operation_id);

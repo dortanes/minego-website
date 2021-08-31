@@ -20,7 +20,7 @@ class Payments extends Schema_1.default {
             table.string('operator', 7);
             table.bigInteger('kassaPaymentId');
             table.string('email', 30);
-            table.integer('phone', 15);
+            table.bigInteger('phone');
             table.integer('currencyId', 2);
             table.string('wallet');
             table.timestamps(true, true);
