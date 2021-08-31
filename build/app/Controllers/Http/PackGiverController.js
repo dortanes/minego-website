@@ -33,7 +33,7 @@ class PackGiverController {
                     nickname +
                     '&e за покупку доната &a&l' +
                     pack?.name +
-                    '&e!" time:30 player:@a');
+                    '&e!" time:30 player:@a color:yellow');
             })
                 .on('response', (str) => {
                 console.log('rcon >> response:', str);
