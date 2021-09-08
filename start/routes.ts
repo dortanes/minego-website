@@ -72,6 +72,13 @@ Route.group(() => {
 Route.get('/', async ({ view }) =>
   view.render('home', {
     packs: await Pack.query().where('active', '=', true),
+    lastBuys: await Payment.query()
+      .where({
+        status: 'finished',
+      })
+      .select(['nickname', 'id', 'packId'])
+      .limit(5)
+      .orderBy('payments.id', 'asc'),
   })
 )
 Route.get('/privacy-policy', async ({ view }) => view.render('privacy-policy'))
