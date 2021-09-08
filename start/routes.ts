@@ -25,8 +25,19 @@ import API from 'node-mc-api'
 
 // Чекаем платежи с разным интервалом
 async function a() {
-  await new YooMoneyPayController().checkPayments()
-  setTimeout(() => a(), 20 * 1000 + Math.floor(Math.random() * 10000))
+  function randomInteger(min: number, max: number): number {
+    // случайное число от min до (max+1)
+    let rand = min + Math.random() * (max + 1 - min)
+    return Math.floor(rand)
+  }
+
+  try {
+    await new YooMoneyPayController().checkPayments()
+  } catch (err) {
+    console.error('Error occured while check YooMoney payments:', err)
+  }
+
+  setTimeout(() => a(), 60 * 1000 + randomInteger(1, 30) * 1000)
 }
 a()
 
