@@ -8,8 +8,17 @@ const YooMoneyPayController_1 = __importDefault(global[Symbol.for('ioc.use')]("A
 const Pack_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Pack"));
 const node_mc_api_1 = __importDefault(require("node-mc-api"));
 async function a() {
-    await new YooMoneyPayController_1.default().checkPayments();
-    setTimeout(() => a(), 20 * 1000 + Math.floor(Math.random() * 10000));
+    function randomInteger(min, max) {
+        let rand = min + Math.random() * (max + 1 - min);
+        return Math.floor(rand);
+    }
+    try {
+        await new YooMoneyPayController_1.default().checkPayments();
+    }
+    catch (err) {
+        console.error('Error occured while check YooMoney payments:', err);
+    }
+    setTimeout(() => a(), 60 * 1000 + randomInteger(1, 30) * 1000);
 }
 a();
 Route_1.default.group(() => {
