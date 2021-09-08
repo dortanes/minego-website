@@ -77,7 +77,7 @@ Route.get('/', async ({ view }) =>
         status: 'finished',
       })
       .select(['nickname', 'id', 'packId'])
-      .limit(5)
+      .limit(4)
       .orderBy('payments.id', 'asc'),
   })
 )
