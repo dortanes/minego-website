@@ -1301,6 +1301,8 @@ footer .row .other .social img {
 .advantage_section.buys_section .advantage_block img {
     width: 55%;
     height: auto;
+    touch-action: none;
+    pointer-events: none;
 }
 
 .advantage_section.buys_section .advantage_block .desc {
