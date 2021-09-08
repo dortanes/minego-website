@@ -124,9 +124,6 @@ export default class BuyController {
         case 'mts':
           redirectUri = this.makeMtsLink(price, payment.id, pack)
           break
-        case 'tele2':
-          redirectUri = this.makeMtsLink(price, payment.id, pack)
-          break
         case 'term':
           redirectUri = this.makeAnyPayLink(price, payment.id, 'term', pack)
           break
@@ -184,6 +181,44 @@ export default class BuyController {
 
       // Переадресовываем на оплату
       await response.redirect(redirectUri)
+    } catch (err) {
+      console.error(err)
+      return response.redirect('/?error=' + err)
+    }
+  }
+
+  public async buyTele2({ request, response, view }) {
+    const data = request.all()
+    const params = request.params()
+
+    let promo
+
+    try {
+      const nickname = data.nickname ?? params.nickname
+      const packId = Number(data.id_pack ?? params.id)
+      const promoId = data.promocode ?? params.promocode
+      console.log(nickname, packId, promoId)
+
+      if (!nickname) throw 'Введи ник'
+      if (!packId) throw 'Выбери привилегию'
+      if (!new RegExp('^\\w{3,20}$').test(nickname)) throw 'Неверный ник'
+
+      const pack = await Pack.find(packId)
+      if (!pack) throw 'Привилегия не найдена'
+      if (!pack.active) throw 'Привилегия недоступна'
+
+      if (promoId) {
+        promo = await Promocode.findBy('code', promoId)
+        if (!promo) throw 'Промокод не найден'
+        if (!promo.active || promo.used === promo.limit) throw 'Промокод недоступен'
+      }
+
+      return view.render('payTele2', {
+        nickname,
+        packId,
+        promoId,
+        pack,
+      })
     } catch (err) {
       console.error(err)
       return response.redirect('/?error=' + err)

@@ -659,6 +659,53 @@ section > h2 span {
     animation-fill-mode: both;
 }
 
+.card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 13px;
+    border-radius: 6px;
+    font-size: 18px !important;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 .25rem .75rem rgba(0,0,0,0.2);
+    transition: transform 0.3s ease-out;
+    border: none !important;
+    border-bottom: solid 7px #b33aff !important;
+    position: relative;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: 300;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+
+.card.small {
+    padding: 7.5px;
+    font-weight: 900;
+    margin-top: 20px;
+    font-size: 18px !important;
+    border-bottom: 0 !important;
+    cursor: pointer;
+    border-radius: 20px;
+    background: linear-gradient(
+        138.18deg
+        , #8B39FF -1.51%, #FB39FF 93.2%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card.small:hover {
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    color: white;
+}
+
 @-webkit-keyframes headShake {
     0% {
         -webkit-transform: translateX(0);

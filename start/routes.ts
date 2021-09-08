@@ -81,4 +81,6 @@ Route.get('/rules', async ({ view }) => view.render('rules'))
 
 Route.any('/buy', 'BuyController.buy')
 Route.get('/buy/:nickname/:id/:promocode?', 'BuyController.buy')
+Route.get('/pcp/tele2/:nickname/:id/:promocode?', 'BuyController.buyTele2')
+Route.get('/pcp/proc/tele2/:nickname/:id/:promocode?', 'Tele2Controller.createPayment')
 Route.get('/pay/:operator/:nickname/:id/:promocode?', 'BuyController.pay')
