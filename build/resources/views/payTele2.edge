@@ -1,0 +1,33 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="robots" content="noindex">
+	<title>Оплата</title>
+	<link href="/payment/pay.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/payment/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+	<section class="container" role="main">
+		<h2>Оплата привилегии "{{ pack.name }}"<br>с помощью Tele2</h2>
+        <div>
+            <form action="/pcp/proc/tele2/{{ nickname }}/{{ packId }}{{ promoId ? '/' + promoId : '' }}">
+                <input type="hidden" name="act" value="create">
+                <div class="card" style="width: 18rem;">
+                    <input type="text" name="phone" placeholder="Введи номер телефона" pattern="([\+]*[7-8]{1}\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2})">
+                </div>
+                <div class="card small" style="width: 18rem;" onclick="document.querySelector('form').submit()">
+                    Оплатить
+                </div>
+            </form>
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-top: 3em">
+            <img src="/images/logo.svg"/>
+        </div>
+	</section>
+
+</body>
+</html>

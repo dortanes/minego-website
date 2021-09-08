@@ -51,5 +51,7 @@ Route_1.default.get('/help', async ({ view }) => view.render('help'));
 Route_1.default.get('/rules', async ({ view }) => view.render('rules'));
 Route_1.default.any('/buy', 'BuyController.buy');
 Route_1.default.get('/buy/:nickname/:id/:promocode?', 'BuyController.buy');
+Route_1.default.get('/pcp/tele2/:nickname/:id/:promocode?', 'BuyController.buyTele2');
+Route_1.default.get('/pcp/proc/tele2/:nickname/:id/:promocode?', 'Tele2Controller.createPayment');
 Route_1.default.get('/pay/:operator/:nickname/:id/:promocode?', 'BuyController.pay');
 //# sourceMappingURL=routes.js.map
