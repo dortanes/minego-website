@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Route_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Core/Route"));
 const YooMoneyPayController_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Controllers/Http/YooMoneyPayController"));
 const Pack_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Pack"));
+const Payment_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Payment"));
+const moment_1 = __importDefault(require("moment"));
 const node_mc_api_1 = __importDefault(require("node-mc-api"));
-async function a() {
+async function checkPayments() {
     function randomInteger(min, max) {
         let rand = min + Math.random() * (max + 1 - min);
         return Math.floor(rand);
@@ -18,9 +20,21 @@ async function a() {
     catch (err) {
         console.error('Error occured while check YooMoney payments:', err);
     }
-    setTimeout(() => a(), 60 * 1000 + randomInteger(1, 30) * 1000);
+    setTimeout(() => checkPayments(), 60 * 1000 + randomInteger(1, 30) * 1000);
 }
-a();
+checkPayments();
+async function cleanOldPayments() {
+    try {
+        await Promise.all((await Payment_1.default.query()
+            .where('updated_at', '<', moment_1.default().utc().subtract(6, 'hours').toISOString())
+            .andWhere('status', '=', 'created')).map(async (payment) => await payment.delete()));
+    }
+    catch (err) {
+        console.error('Error occured while clean old payments:', err);
+    }
+    setTimeout(() => cleanOldPayments(), 500 * 1000);
+}
+cleanOldPayments();
 Route_1.default.group(() => {
     Route_1.default.group(() => {
         Route_1.default.post('pm.hook.ap', 'AnyPayController.hook');
