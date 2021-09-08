@@ -49,7 +49,7 @@ Route_1.default.get('/', async ({ view }) => view.render('home', {
         status: 'finished',
     })
         .select(['nickname', 'id', 'packId'])
-        .limit(5)
+        .limit(4)
         .orderBy('payments.id', 'asc'),
 }));
 Route_1.default.get('/privacy-policy', async ({ view }) => view.render('privacy-policy'));
