@@ -106,6 +106,29 @@ $(function() {
         $('header .row .menu .menu_list').toggleClass('active');
         $('html').toggleClass('active');
     })
+    $('.last_donates_section .row .slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        // arrows: false,
+        prevArrow: $('.last_donates_section .row .arrows img.left'),
+        nextArrow: $('.last_donates_section .row .arrows img.right'),
+        responsive: [{
+                breakpoint: 1050,
+                settings: {
+
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 790,
+                settings: {
+
+                    slidesToShow: 1
+                }
+            },
+
+        ],
+    });
     $('.mode_section .row .slider').slick({
         slidesToShow: 3,
         slidesToScroll: 1,

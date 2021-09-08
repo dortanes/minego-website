@@ -44,6 +44,13 @@ Route_1.default.group(() => {
 }).prefix('api');
 Route_1.default.get('/', async ({ view }) => view.render('home', {
     packs: await Pack_1.default.query().where('active', '=', true),
+    lastBuys: await Payment_1.default.query()
+        .where({
+        status: 'finished',
+    })
+        .select(['nickname', 'id', 'packId'])
+        .limit(5)
+        .orderBy('payments.id', 'asc'),
 }));
 Route_1.default.get('/privacy-policy', async ({ view }) => view.render('privacy-policy'));
 Route_1.default.get('/user-agreement', async ({ view }) => view.render('user-agreement'));
