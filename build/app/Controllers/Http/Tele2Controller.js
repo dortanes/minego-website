@@ -60,7 +60,7 @@ class Tele2Controller {
                 console.error(e);
                 throw 'Ошибка связи с Tele2. Повторите попытку позже.';
             });
-            console.log('createReq =', createReq, Boolean(createReq?.data?.success));
+            console.log('createReq =', createReq?.data);
             createReq = createReq?.data;
             if (createReq?.success !== 'true') {
                 throw new Error('Ты неверно ввёл номер, либо ошибка на стороне Tele2.');
@@ -113,7 +113,7 @@ class Tele2Controller {
             console.error(e);
             throw 'Ошибка связи с Tele2. Повторите попытку позже.';
         });
-        console.log('createReq =', createReq, Boolean(createReq?.data?.success));
+        console.log('createReq =', createReq?.data);
         createReq = createReq?.data;
         if (createReq?.success !== 'true') {
             throw new Error('Ты неверно ввёл код или что-то пошло не так. Попробуй ещё раз');
