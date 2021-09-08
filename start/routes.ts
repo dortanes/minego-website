@@ -21,10 +21,12 @@
 import Route from '@ioc:Adonis/Core/Route'
 import YooMoneyPayController from 'App/Controllers/Http/YooMoneyPayController'
 import Pack from 'App/Models/Pack'
+import Payment from 'App/Models/Payment'
+import moment from 'moment'
 import API from 'node-mc-api'
 
 // Чекаем платежи с разным интервалом
-async function a() {
+async function checkPayments() {
   function randomInteger(min: number, max: number): number {
     // случайное число от min до (max+1)
     let rand = min + Math.random() * (max + 1 - min)
@@ -37,9 +39,27 @@ async function a() {
     console.error('Error occured while check YooMoney payments:', err)
   }
 
-  setTimeout(() => a(), 60 * 1000 + randomInteger(1, 30) * 1000)
+  setTimeout(() => checkPayments(), 60 * 1000 + randomInteger(1, 30) * 1000)
 }
-a()
+checkPayments()
+
+// Чекаем платежи с разным интервалом
+async function cleanOldPayments() {
+  try {
+    await Promise.all(
+      (
+        await Payment.query()
+          .where('updated_at', '<', moment().utc().subtract(6, 'hours').toISOString())
+          .andWhere('status', '=', 'created')
+      ).map(async (payment) => await payment.delete())
+    )
+  } catch (err) {
+    console.error('Error occured while clean old payments:', err)
+  }
+
+  setTimeout(() => cleanOldPayments(), 500 * 1000)
+}
+cleanOldPayments()
 
 Route.group(() => {
   Route.group(() => {
