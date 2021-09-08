@@ -12,6 +12,10 @@
     header .row .menu .menu_list .link {
         font-size: 12px;
     }
+    
+    .advantage_section.buys_section .advantage_block img {
+        width: 37%;
+    }
 }
 
 @media (min-width: 0) and (max-width: 769px) {
@@ -107,6 +111,9 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex
+    }
+    .advantage_section.buys_section .advantage_block img {
+        width: 37%;
     }
 }
 
@@ -207,6 +214,9 @@
     .footer_links .row .links a {
         margin: 0;
         margin-bottom: 10px
+    }
+    .advantage_section.buys_section .advantage_block img {
+        width: 37%;
     }
 }
 
