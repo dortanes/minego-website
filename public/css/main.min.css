@@ -303,7 +303,6 @@ header .row .ip .ip_block .name {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .online_block .ip_block {
