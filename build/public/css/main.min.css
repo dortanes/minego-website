@@ -323,9 +323,12 @@ header .row .ip .ip_block .name {
     font-size: 15px;
     line-height: 18px;
     color: #FFFFFF;
-    margin-left: 20px;
     z-index: 2;
     margin-top: 10px;
+}
+
+.online_block .ip_block:nth-child(2) {
+    margin-left: 20px;
 }
 
 .online_block .ip_block .name {
